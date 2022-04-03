@@ -9,7 +9,7 @@ import static org.opencv.imgcodecs.Imgcodecs.imread;
 public class Exemplo1 {
     public static void main (String args[]) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        Mat imagemColorida = imread("pessoas/pessoas3.jpg");
+        Mat imagemColorida = imread("pessoas/pessoas4.jpg");
         Mat imagemCinza = new Mat();
         Imgproc.cvtColor(imagemColorida, imagemCinza, Imgproc.COLOR_BGR2GRAY);
 
@@ -21,10 +21,10 @@ public class Exemplo1 {
         //Obtem as faces e coloca na variável facesDetectadas
         classifier.detectMultiScale(imagemCinza, facesDetectadas,
                 1.19,//scale factore: Especifica quanto o tamanho da imagem é reduzido em cada escala (1.1 é a escala mínima)
-                5,//minNeighbors: indica quantos vizinhos cada retângulo candidato deve ter para mantê-lo
+                3,//minNeighbors: indica quantos vizinhos cada retângulo candidato deve ter para mantê-lo
                 0,//flags: rejeita algumas regiões de imagens que contém muitas ou poucas bordas
                 new Size(30,30),//minSize: especifica o menor objeto a ser reconhecido
-                new Size(100,100));//maxSize
+                new Size(500,500));//maxSize
 
         System.out.println(facesDetectadas.toArray().length);
         for(Rect rect : facesDetectadas.toArray()) {
