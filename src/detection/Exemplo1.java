@@ -20,7 +20,7 @@ public class Exemplo1 {
         MatOfRect facesDetectadas = new MatOfRect();
         //Obtem as faces e coloca na variável facesDetectadas
         classifier.detectMultiScale(imagemCinza, facesDetectadas,
-                1.2,//scale factore: Especifica quanto o tamanho da imagem é reduzido em cada escala (1.1 é a escala mínima)
+                1.19,//scale factore: Especifica quanto o tamanho da imagem é reduzido em cada escala (1.1 é a escala mínima)
                 5,//minNeighbors: indica quantos vizinhos cada retângulo candidato deve ter para mantê-lo
                 0,//flags: rejeita algumas regiões de imagens que contém muitas ou poucas bordas
                 new Size(30,30),//minSize: especifica o menor objeto a ser reconhecido
