@@ -8,7 +8,7 @@ import static org.opencv.imgcodecs.Imgcodecs.imread;
 public class Exemplo2 {
     public static void main (String args[]) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        Mat imagemColorida = imread("pessoas/faceolho.jpg");
+        Mat imagemColorida = imread("pessoas/pessoas4.jpg");
         Mat imagemCinza = new Mat();
         Imgproc.cvtColor(imagemColorida, imagemCinza, Imgproc.COLOR_BGR2GRAY);
 
@@ -32,6 +32,11 @@ public class Exemplo2 {
         MatOfRect olhosDetectados = new MatOfRect();
         CascadeClassifier classificadorOlho = new CascadeClassifier("cascades/haarcascade_eye.xml");
         classificadorOlho.detectMultiScale(imagemCinza, olhosDetectados);
+//                1.01,
+//                5,
+//                0,
+//                new Size(5,5),
+//                new Size(20,20));
         for(Rect rect : olhosDetectados.toArray()) {
             Imgproc.rectangle(imagemColorida, new Point(rect.x, rect.y),
                     new Point(rect.x + rect.width, rect.y + rect.height)
