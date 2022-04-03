@@ -1,7 +1,9 @@
 package detection;
 
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
+import org.opencv.core.*;
+import org.opencv.core.Point;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 
 import javax.swing.*;
@@ -70,6 +72,25 @@ public class Webcam extends javax.swing.JFrame{
                 capture.read(video);
                 if(!video.empty()) {
                     setSize(video.width() + 50, video.height() + 70);
+
+                    Mat imagemColorida = video;
+                    Mat imagemCinza = new Mat();
+                    Imgproc.cvtColor(imagemColorida, imagemCinza, Imgproc.COLOR_BGR2GRAY);
+                    CascadeClassifier classificador = new CascadeClassifier("cascades/haarcascade_frontalface_default.xml");
+                    MatOfRect facesDetectadas = new MatOfRect();
+                    classificador.detectMultiScale(imagemCinza, facesDetectadas,
+                            1.1,
+                            1,
+                            0,
+                            new Size(50, 50),
+                            new Size(500,500 ));
+
+                    for(Rect rect : facesDetectadas.toArray()) {
+                        Imgproc.rectangle(imagemColorida, new Point(rect.x, rect.y),
+                                new Point(rect.x + rect.width, rect.y + rect.height)
+                                , new Scalar(0, 0, 255), 2);
+                    }
+
                     BufferedImage image = new Utilities().convertMatToImage(video);
                     Graphics g = panel1.getGraphics();
                     g.drawImage(image, 10, 10, image.getWidth(), image.getHeight(), null);//Configura as bordas na janela da Webcam
