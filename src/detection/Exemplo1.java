@@ -9,18 +9,18 @@ import static org.opencv.imgcodecs.Imgcodecs.imread;
 public class Exemplo1 {
     public static void main (String args[]) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        Mat imagemColorida = imread("pessoas/pessoas4.jpg");
+        Mat imagemColorida = imread("outros/outros/gato3.jpg");
         Mat imagemCinza = new Mat();
         Imgproc.cvtColor(imagemColorida, imagemCinza, Imgproc.COLOR_BGR2GRAY);
 
         //Obter classificador de rosto
-        CascadeClassifier classifier = new CascadeClassifier("cascades/haarcascade_frontalface_default.xml");
+        CascadeClassifier classifier = new CascadeClassifier("cascades/haarcascade_frontalcatface.xml");
 
         //Armazena todas as faces detectadas
         MatOfRect facesDetectadas = new MatOfRect();
         //Obtem as faces e coloca na variável facesDetectadas
         classifier.detectMultiScale(imagemCinza, facesDetectadas,
-                1.19,//scale factore: Especifica quanto o tamanho da imagem é reduzido em cada escala (1.1 é a escala mínima)
+                1.01,//scale factore: Especifica quanto o tamanho da imagem é reduzido em cada escala (1.01 é a escala mínima)
                 3,//minNeighbors: indica quantos vizinhos cada retângulo candidato deve ter para mantê-lo
                 0,//flags: rejeita algumas regiões de imagens que contém muitas ou poucas bordas
                 new Size(30,30),//minSize: especifica o menor objeto a ser reconhecido
